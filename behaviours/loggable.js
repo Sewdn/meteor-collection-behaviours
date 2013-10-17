@@ -4,7 +4,7 @@ CollectionBehaviours.defineBehaviour('loggable', function(getTransform, args){
     if(!modifier.$push){
       modifier.$push = {};
     }
-    console.log(_.omit(modifier, '$push', 'updatedAt'));
+    //console.log(_.omit(modifier, '$push', 'updatedAt'));
     //modifier.$push.logs = _.omit(modifier, '$push.logs', 'updatedAt');
   });
 });

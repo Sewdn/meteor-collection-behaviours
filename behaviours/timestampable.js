@@ -4,7 +4,6 @@ CollectionBehaviours.defineBehaviour('timestampable', function(getTransform, arg
     doc.createdAt = Date.now();
   });
   self.before.update(function (userId, doc, fieldNames, modifier, options) {
-    console.log(userId, doc, fieldNames, modifier, options);
     if(!modifier.$set)
       modifier.$set = {};
     modifier.$set.updatedAt = Date.now();
