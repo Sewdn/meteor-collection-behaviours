@@ -8,14 +8,10 @@ CollectionBehaviours.defineBehaviour = function (name, method) {
 };
 
 CollectionBehaviours.extendCollectionInstance = function (self) {
-  _.each(behaviours, function (behaviour, name) {
-    self[name] = behaviour;
-  });
   // Wrap mutator methods, letting the defined advice do the work
+  //var collection = Meteor.isClient ? self : self._collection;
   _.each(behaviours, function (behaviour, method) {
-    var _super = Meteor.isClient ? self[method] : self._collection[method];
-
-    (Meteor.isClient ? self : self._collection)[method] = function () {
+    self[method] = function () {
       return behaviour.call(self,
         function (doc) {
           return  _.isFunction(self._transform)

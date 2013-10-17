@@ -13,8 +13,10 @@ Package.on_use(function (api, where) {
   api.add_files([
       "collection-behaviours.js",
       "behaviours/timestampable.js",
-      "behaviours/softremovable.js",
+      "behaviours/softRemovable.js",
       "behaviours/loggable.js",
+      "behaviours/autoIncrementable.js",
+      "behaviours/sortable.js",
   ], both);
 
   api.export("CollectionBehaviours");
