@@ -78,6 +78,22 @@ test.findOne({name: 7}).down(2);
 _.pluck(test.find().fetch(), "name"); //returns [1,2,3,5,4,6,8,9,7,10]
 
 ```
+--------------------------------------------------------------------------------
+
+### .trackable()
+
+Adds the trackable pattern.
+
+This pattern is useful to track the evolution of one or more fields.
+For every update of a document of the collection affecting one of the configured field, a trackRecord is kept. This trackrecord consists of an array of objects, containing the previous value and a trackedAt timestamp stating when this value was changed.
+
+```javascript
+var test = new Meteor.Collection("test");
+
+test.trackable('field1', 'field2');
+test.trackable(['field1', 'field2']);
+
+```
 
 --------------------------------------------------------------------------------
 
