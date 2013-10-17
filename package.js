@@ -6,11 +6,15 @@ var both = ["client", "server"];
 
 Package.on_use(function (api, where) {
   api.use([
+    "underscore",
     "collection-hooks"
   ], both);
 
   api.add_files([
-      "collection-behaviours.js"
+      "collection-behaviours.js",
+      "behaviours/timestampable.js",
+      "behaviours/softremovable.js",
+      "behaviours/loggable.js",
   ], both);
 
   api.export("CollectionBehaviours");
