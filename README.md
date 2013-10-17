@@ -45,7 +45,7 @@ Adds the soft delete behaviour.
 
 This behaviour is useful to keep track of removed documents.
 Every document that gets removed from the collection, will not really be removed, but a removed boolean and a removedAt timestamp will be added.
-All documents that are search in the collection, will not be found if the were indicated as removed.
+All documents that are searched in the collection, will not be found if they were indicated as removed.
 
 ```javascript
 var test = new Meteor.Collection("test");
