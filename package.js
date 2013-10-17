@@ -17,6 +17,7 @@ Package.on_use(function (api, where) {
       "behaviours/loggable.js",
       "behaviours/autoIncrementable.js",
       "behaviours/sortable.js",
+      "behaviours/trackable.js"
   ], both);
 
   api.export("CollectionBehaviours");
