@@ -10,7 +10,7 @@ Uses the excellent collection-hooks package to hook into collection hooks.
 
 Adds the timestampable behaviour.
 
-Every document that gets inserted into the collection, will have a createdAt timestamp added to it.
+Every document inserted into the collection, will have a createdAt timestamp added to it.
 Every document of the collection that is being updated, will have a updatedAt timestamp added to it (or updated).
 
 ```javascript
