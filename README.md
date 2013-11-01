@@ -29,7 +29,7 @@ test.timestampable();
 
 Adds an autoIncremented value.
 
-Every document that gets inserted into the collection, will have a field added to it, containing an unique integer that is one (or other increment) higher the the previously inserted document.
+Every document that gets inserted into the collection, will have a field added to it, containing a unique integer that is one (or other increment) higher than the previously inserted document.
 
 ```javascript
 var test = new Meteor.Collection("test");
@@ -45,7 +45,7 @@ Adds the soft delete behaviour.
 
 This behaviour is useful to keep track of removed documents.
 Every document that gets removed from the collection, will not really be removed, but a removed boolean and a removedAt timestamp will be added.
-All documents that are searched in the collection, will not be found if they were indicated as removed.
+Documents that are searched in the collection, will not be found if they have been indicated as being removed.
 
 ```javascript
 var test = new Meteor.Collection("test");
@@ -62,7 +62,7 @@ test.softRemovable();
 
 Adds the sortable pattern.
 
-This pattern is useful to add a default sorting to a collection, other then insertion order.
+This pattern is useful to add a default sorting to a collection, other than insertion order.
 This behaviour uses the autoIncrement behaviour to add a field with an integer value. Extra methods are added to the prototype of the transformed document to change the position in the sorted list.
 
 ```javascript
@@ -85,7 +85,7 @@ _.pluck(test.find().fetch(), "name"); //returns [1,2,3,5,4,6,8,9,7,10]
 Adds the trackable pattern.
 
 This pattern is useful to track the evolution of one or more fields.
-For every update of a document of the collection affecting one of the configured field, a trackRecord is kept. This trackrecord consists of an array of objects, containing the previous value and a trackedAt timestamp stating when this value was changed.
+For every update of a document of the collection affecting one of the configured field, a trackRecord is kept. This trackRecord consists of an array of objects, containing the previous value and a trackedAt timestamp stating when this value was changed.
 
 ```javascript
 var test = new Meteor.Collection("test");
@@ -100,7 +100,7 @@ test.trackable(['field1', 'field2']);
 ## Define your own behaviours
 
 - Look at the source of the behaviours in the behaviours folder to be able to add your own custom behaviours.
-- Simply register a new behaviour with the CollectionBehaviours.defineBehaviour method
+- Simply register a new behaviour with the CollectionBehaviours.defineBehaviour method.
 
 ```javascript
 CollectionBehaviours.defineBehaviour('blamable', function(getTransform, args){
