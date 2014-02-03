@@ -15,7 +15,13 @@ CollectionBehaviours.extendCollectionInstance = function (self) {
       return behaviour.call(self,
         function (doc) {
           return  _.isFunction(self._transform)
-                  ? function (d) { return self._transform(d || doc); }
+                  ? function (d) {
+                    var dd = d || doc;
+                    //make sure only valid docs get transformed
+                    if(!dd._id)
+                      return dd;
+                    return self._transform(dd);
+                  }
                   : function (d) { return d || doc; };
         },
         _.toArray(arguments)
