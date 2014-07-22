@@ -2,6 +2,11 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
   var self = this;
   self.before.remove(function (userId, doc) {
     self.update({_id: doc._id}, {$set: {removed: true, removedAt: Date.now()}});
+    //check if after remove hooks exist
+    _.each(self._hookAspects.remove.after, function(after){
+      if(after.aspect)
+        after.aspect.call(self, userId, doc);
+    });
     return false;
   });
   self.before.find(function (userId, selector, options) {
@@ -12,6 +17,6 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
   });
   self.unRemove = function(selector){
     //TODO
-    self.update(selector, {$set: {removed: false, unRemovedAt: Date.now()}});
+    self.update(selector, {$unset: {removed: true}, $set: {unRemovedAt: Date.now()}});
   };
 });
