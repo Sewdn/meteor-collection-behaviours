@@ -10,10 +10,12 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
     return false;
   });
   self.before.find(function (userId, selector, options) {
-    selector.removed = {$exists: false};
+    if(typeof selector.removed === 'undefined')
+      selector.removed = {$exists: false};
   });
   self.before.findOne(function (userId, selector, options) {
-    selector.removed = {$exists: false};
+    if(typeof selector.removed === 'undefined')
+      selector.removed = {$exists: false};
   });
   self.unRemove = function(selector){
     //TODO
