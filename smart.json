@@ -3,7 +3,7 @@
   "description": "Extends Meteor.Collection with behaviour patterns using CollectionHooks",
   "homepage": "https://github.com/Sewdn/meteor-collection-behaviours",
   "author": "Pieter Soudan",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "git": "https://github.com/Sewdn/meteor-collection-behaviours.git",
   "packages": {
     "collection-hooks": "0.7.2"
