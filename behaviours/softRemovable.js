@@ -1,7 +1,7 @@
 CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, args){
   var self = this;
   self.before.remove(function (userId, doc) {
-    self.update({_id: doc._id}, {$set: {removed: true, removedAt: Date.now()}});
+    self.update({_id: doc._id}, {$set: {removed: true, removedAt: new Date()}});
     //check if after remove hooks exist
     _.each(self._hookAspects.remove.after, function(after){
       if(after.aspect)
