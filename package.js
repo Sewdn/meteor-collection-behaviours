@@ -10,7 +10,7 @@ Package.on_use(function (api, where) {
   api.versionsFrom("METEOR@0.9.0");
   api.use([
     "underscore",
-    "matb33:collection-hooks"
+    "matb33:collection-hooks@0.7.3"
   ], both);
 
   api.add_files([
