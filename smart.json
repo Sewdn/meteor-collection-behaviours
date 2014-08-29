@@ -6,6 +6,8 @@
   "version": "0.1.4",
   "git": "https://github.com/Sewdn/meteor-collection-behaviours.git",
   "packages": {
-    "collection-hooks": "0.7.1"
+    "collection-hooks": {
+       "git": "https://github.com/matb33/meteor-collection-hooks.git"
+    }
   }
 }
