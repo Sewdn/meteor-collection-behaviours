@@ -19,6 +19,6 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
   });
   self.unRemove = function(selector){
     //TODO
-    self.update(selector, {$unset: {removed: true}, $set: {unRemovedAt: Date.now()}});
+    self.update(selector, {$unset: {removed: true}, $set: {unRemovedAt: new Date()}});
   };
 });

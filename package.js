@@ -1,16 +1,13 @@
 Package.describe({
-  summary: "Extends Meteor.Collection with behaviour patterns using CollectionHooks",
-  version: "0.1.5",
-  git: "https://github.com/Sewdn/meteor-collection-behaviours.git"
+  summary: "Extends Meteor.Collection with behaviour patterns using CollectionHooks"
 });
 
 var both = ["client", "server"];
 
 Package.on_use(function (api, where) {
-  api.versionsFrom("METEOR@0.9.0");
   api.use([
     "underscore",
-    "matb33:collection-hooks@0.7.3"
+    "collection-hooks"
   ], both);
 
   api.add_files([
