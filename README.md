@@ -4,7 +4,15 @@ Extends Mongo.Collection with custom behaviour patterns.
 
 Uses the excellent collection-hooks package to hook into collection hooks.
 
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+## Getting Started
+
+Installation:
+
+```
+meteor add sewdn:collection-behaviours
+```
 
 ### .timestampable()
 
