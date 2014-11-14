@@ -1,5 +1,5 @@
 Package.describe({
-  summary: "Extends Meteor.Collection with behaviour patterns using CollectionHooks"
+  summary: "Extends Mongo.Collection with behaviour patterns using CollectionHooks"
 });
 
 var both = ["client", "server"];

@@ -1,6 +1,6 @@
-# Meteor Collection Behaviours
+# Mongo Collection Behaviours
 
-Extends Meteor.Collection with custom behaviour patterns.
+Extends Mongo.Collection with custom behaviour patterns.
 
 Uses the excellent collection-hooks package to hook into collection hooks.
 
@@ -14,7 +14,7 @@ Every document inserted into the collection, will have a createdAt timestamp add
 Every document of the collection that is being updated, will have a updatedAt timestamp added to it (or updated).
 
 ```javascript
-var test = new Meteor.Collection("test");
+var test = new Mongo.Collection("test");
 
 test.timestampable();
 ```
@@ -32,7 +32,7 @@ Adds an autoIncremented value.
 Every document that gets inserted into the collection, will have a field added to it, containing a unique integer that is one (or other increment) higher than the previously inserted document.
 
 ```javascript
-var test = new Meteor.Collection("test");
+var test = new Mongo.Collection("test");
 
 test.autoIncrementable('fieldName', 2);
 ```
@@ -48,7 +48,7 @@ Every document that gets removed from the collection, will not really be removed
 Documents that are searched in the collection, will not be found if they have been indicated as being removed.
 
 ```javascript
-var test = new Meteor.Collection("test");
+var test = new Mongo.Collection("test");
 
 test.softRemovable();
 ```
@@ -66,7 +66,7 @@ This pattern is useful to add a default sorting to a collection, other than inse
 This behaviour uses the autoIncrement behaviour to add a field with an integer value. Extra methods are added to the prototype of the transformed document to change the position in the sorted list.
 
 ```javascript
-var test = new Meteor.Collection("test");
+var test = new Mongo.Collection("test");
 
 test.sortable('position');
 
@@ -88,7 +88,7 @@ This pattern is useful to track the evolution of one or more fields.
 For every update of a document of the collection affecting one of the configured field, a trackRecord is kept. This trackRecord consists of an array of objects, containing the previous value and a trackedAt timestamp stating when this value was changed.
 
 ```javascript
-var test = new Meteor.Collection("test");
+var test = new Mongo.Collection("test");
 
 test.trackable('field1', 'field2');
 test.trackable(['field1', 'field2']);
@@ -115,7 +115,7 @@ CollectionBehaviours.defineBehaviour('blamable', function(getTransform, args){
   });
 }
 
-var test = new Meteor.Collection("test");
+var test = new Mongo.Collection("test");
 
 test.blamable();
 ```

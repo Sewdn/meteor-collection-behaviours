@@ -1,4 +1,4 @@
-var constructor = Meteor.Collection;
+var constructor = Mongo.Collection;
 var behaviours = {};
 
 CollectionBehaviours = {};
@@ -30,16 +30,16 @@ CollectionBehaviours.extendCollectionInstance = function (self) {
   });
 };
 
-Meteor.Collection = function () {
+Mongo.Collection = function () {
   var ret = constructor.apply(this, arguments);
   CollectionBehaviours.extendCollectionInstance(this);
   return ret;
 };
 
-Meteor.Collection.prototype = Object.create(constructor.prototype);
+Mongo.Collection.prototype = Object.create(constructor.prototype);
 
 for (var func in constructor) {
   if (constructor.hasOwnProperty(func)) {
-    Meteor.Collection[func] = constructor[func];
+    Mongo.Collection[func] = constructor[func];
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "collection-behaviours",
-  "description": "Extends Meteor.Collection with behaviour patterns using CollectionHooks",
+  "description": "Extends Mongo.Collection with behaviour patterns using CollectionHooks",
   "homepage": "https://github.com/sewdn/meteor-collection-behaviours",
   "author": "Pieter Soudan",
   "version": "0.1.6",
