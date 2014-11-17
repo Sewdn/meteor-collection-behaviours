@@ -2,7 +2,7 @@ Package.describe({
   summary: "Extends Mongo.Collection with behaviour patterns using matb33:collection-hooks",
   "version": "0.2.0",
   "git": "https://github.com/Sewdn/meteor-collection-behaviours.git",
-  "name": "meteor-collection-behaviours"
+  "name": "sewdn:collection-behaviours"
 });
 
 var both = ["client", "server"];
