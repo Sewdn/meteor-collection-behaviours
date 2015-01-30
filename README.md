@@ -28,7 +28,7 @@ test.timestampable();
 ```
 
 #### TODO
-- add options to choose the name of the createdAd and updateAt fields
+- add options to choose the name of the createdAt and updateAt fields
 - add options to enable/disable createdAt, updatedAt timestamp
 
 --------------------------------------------------------------------------------
