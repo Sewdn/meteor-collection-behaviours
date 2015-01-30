@@ -14,7 +14,7 @@ Package.onUse(function (api, where) {
   api.addFiles = api.addFiles || api.add_files;     // backwards-compat
 
   if(api.versionsFrom) {
-    api.versionsFrom('METEOR@0.9.1');
+    api.versionsFrom('METEOR@0.9.4');
     api.use([
       'mongo',
       'underscore',
