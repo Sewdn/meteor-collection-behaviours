@@ -18,13 +18,15 @@ Package.onUse(function (api, where) {
     api.use([
       'mongo',
       'underscore',
+      'lai:collection-extensions@0.1.3',
       'matb33:collection-hooks@0.7.6'
     ], both);
   } else {
     api.use([
       'mongo-livedata',
       'underscore',
-      'collection-hooks'
+      'lai:collection-extensions',
+      'matb33:collection-hooks'
     ], both);
   }
 
