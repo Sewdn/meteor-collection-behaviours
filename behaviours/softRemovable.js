@@ -1,13 +1,13 @@
 CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, args){
   var self = this,
-      method = "softRemovable_"+this._name;
+      method = 'softRemovable_' + this._name;
   // server method to by-pass "can only remove by ID" on the client
   if (Meteor.isServer) {
-    var m = {};
-    m[method] = function(selector) {
-      self.unRemove(selector);
+    var methods = {};
+    methods[method] = function(selector) {
+      return self.unRemove(selector);
     };
-    Meteor.methods(m);
+    Meteor.methods(methods);
   }
 
   self.before.remove(function (userId, doc) {
@@ -17,44 +17,38 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
     //   if(after.aspect)
     //     after.aspect.call(self, userId, doc);
     // });
-    // ! hack to bypass actual removal but dont bypass callback functions and after aspects
+    // ! hack to bypass actual removal but don't bypass callback functions and after aspects
     // because of https://github.com/matb33/meteor-collection-hooks/blob/master/remove.js#L27
     return 0;
   });
 
-  self.before.find(function (userId, selector, options) {
-    if (typeof selector === 'undefined')
-      selector = {};
-
-    if(selector && typeof selector.removed === 'undefined')
+  function sanitizeSelector(selector) {
+    if (selector && typeof selector.removed === 'undefined') {
       selector.removed = {$exists: false};
-  });
+    }
+  }
 
-  self.before.findOne(function (userId, selector, options) {
-    if (typeof selector === 'undefined')
-      selector = {};
+  function find(userId, selector, options) {
+    sanitizeSelector(selector);
+  }
 
-    if(selector && typeof selector.removed === 'undefined')
-      selector.removed = {$exists: false};
-  });
+  self.before.find(find);
+  self.before.findOne(find);
 
-  self.unRemove = function(selector){
-    if (typeof selector === 'undefined')
-      selector = {};
-
-    if(typeof selector.removed === 'undefined')
-      selector.removed = {$exists: false};
-    // self.update(selector, {$unset: {removed: true}}) does not work because it will trigger a 
-    // call to findOne method to retrieve the "doc" for other hooks, but it will return null because the document has the removed flag set
-    // solution: call the update with { _id: "<id>", removed: true } (see impl of find and findOne above.)
-    // but: Meteor only permits removes by ID on the client
-    // thus, we have to send the request to the server via a RPC when then will do the update with the removed: true flag set
+  self.unRemove = function(selector, callback) {
+    // Typically we won't be publishing removed documents to the client (since .find() will filter
+    // them out), so we run the logic on the server.
+    if (_.isString(selector)) selector = { _id: selector };
+    selector.removed = true;
     if (Meteor.isClient) {
-      Meteor.call(method, selector);
+      Meteor.call(method, selector, callback);
     } else {
-      if (_.isString(selector)) selector = { _id: selector };
-      selector.removed = true;
-      self.update(selector, { $unset: { removed: true }, $set: { unRemovedAt: new Date() } });
+      var result = self.update(selector, {
+        $unset: {removed: true},
+        $set: {unRemovedAt: new Date()}
+      });
+      callback && callback(null, result);
+      return result;
     }
   };
 });
