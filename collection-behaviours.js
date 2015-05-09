@@ -38,8 +38,8 @@ CollectionBehaviours = {
     var constructor = as.Collection;// as._CollectionConstructor;
     // var proto = new as.Collection(null)
     var proto = as._CollectionPrototype;
-    console.log('constructor', constructor);
-    console.log('proto', proto);
+    // console.log('constructor', constructor);
+    // console.log('proto', proto);
 
     ns.Collection = function () {
       var ret = constructor.apply(this, arguments);
