@@ -30,7 +30,8 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
     }
     selector = selector || {};
     if (typeof selector.removed === 'undefined') {
-      selector.removed = {$exists: false};
+      // Accepts removed being `false` or not existing.
+      selector.removed = {$ne: true};
     }
     return selector;
   }
