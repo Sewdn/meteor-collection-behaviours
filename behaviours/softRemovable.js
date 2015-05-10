@@ -25,9 +25,7 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
   });
 
   function sanitizeSelector(selector) {
-    if (typeof selector === 'string') {
-      selector = {_id: selector};
-    }
+    if (_.isString(selector) selector = {_id: selector};
     selector = selector || {};
     if (typeof selector.removed === 'undefined') {
       // Accepts removed being `false` or not existing.
