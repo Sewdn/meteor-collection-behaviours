@@ -19,21 +19,30 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
     // });
     // ! hack to bypass actual removal but don't bypass callback functions and after aspects
     // because of https://github.com/matb33/meteor-collection-hooks/blob/master/remove.js#L27
-    return 0;
+    
+    // TODO(aramk) Unsure why the remove is cancelled - it could be a race condition caused by the
+    // update above. Might be safer to run the after hooks manually and return false.
   });
 
   function sanitizeSelector(selector) {
-    if (selector && typeof selector.removed === 'undefined') {
+    if (typeof selector === 'string') {
+      selector = {_id: selector};
+    }
+    selector = selector || {};
+    if (typeof selector.removed === 'undefined') {
       selector.removed = {$exists: false};
     }
+    return selector;
   }
 
-  function find(userId, selector, options) {
-    sanitizeSelector(selector);
+  function findHook(userId, selector, options) {
+    // Standardize the selector into an object and re-assign the original selector in the hook
+    // context to ensure the "removed" field can be applied by default.
+    this.args[0] = sanitizeSelector(selector);
   }
 
-  self.before.find(find);
-  self.before.findOne(find);
+  self.before.find(findHook);
+  self.before.findOne(findHook);
 
   self.unRemove = function(selector, callback) {
     // Typically we won't be publishing removed documents to the client (since .find() will filter
