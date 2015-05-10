@@ -14,4 +14,8 @@ collections = []
 
 if Meteor.isServer
   Meteor.methods
-    removeAllCollections: -> _.each collections, (collection) -> collection.remove({})
+    removeAllCollections: ->
+      _.each collections, (collection) ->
+        collection.direct.remove({})
+        if collection.find().count() != 0
+          throw new Error('Could not remove all documents.')

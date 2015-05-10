@@ -32,14 +32,10 @@ CollectionBehaviours = {
 
   // Borrowed from CollectionHooks.
   wrapCollection: function (ns, as, callback) {
-    // if (!as._CollectionConstructor) as._CollectionConstructor = as.Collection;
     if (!as._CollectionPrototype) as._CollectionPrototype = new as.Collection(null);
 
-    var constructor = as.Collection;// as._CollectionConstructor;
-    // var proto = new as.Collection(null)
+    var constructor = as.Collection;
     var proto = as._CollectionPrototype;
-    // console.log('constructor', constructor);
-    // console.log('proto', proto);
 
     ns.Collection = function () {
       var ret = constructor.apply(this, arguments);
