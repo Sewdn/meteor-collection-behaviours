@@ -59,4 +59,25 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
       return result;
     }
   };
+
+
+  // Add support for a collection.after.unRemove hook.
+  // TODO(aramk) Too tedious to use CollectionHooks.defineAdvice() for now, so we cannot remove
+  // a hook once it's added yet.
+
+  var hookCallbacks = [];
+  self.after.unRemove = function(callback) {
+    hookCallbacks.push(callback);
+  };
+  
+  function afterUnRemove(userId, doc, fieldNames, modifier, options) {
+    var args = arguments;
+    var $unset = modifier.$unset;
+    if ($unset && $unset.removed !== undefined) {
+      _.each(hookCallbacks, function(callback) { callback.apply(this, args) }, this);
+    }
+  }
+
+  self.after.update(afterUnRemove);
+
 });
