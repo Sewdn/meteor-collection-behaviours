@@ -10,18 +10,15 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
     Meteor.methods(methods);
   }
 
-  self.before.remove(function (userId, doc) {
-    self.update({_id: doc._id}, {$set: {removed: true, removedAt: new Date()}});
-    // check if after remove hooks exist
-    // _.each(self._hookAspects.remove.after, function(after){
-    //   if(after.aspect)
-    //     after.aspect.call(self, userId, doc);
-    // });
-    // ! hack to bypass actual removal but don't bypass callback functions and after aspects
-    // because of https://github.com/matb33/meteor-collection-hooks/blob/master/remove.js#L27
-    
-    // TODO(aramk) Unsure why the remove is cancelled - it could be a race condition caused by the
-    // update above. Might be safer to run the after hooks manually and return false.
+  self.after.remove(function (userId, doc) {
+    var newDoc = _.extend(doc, {removed: true, removedAt: new Date()});
+    // Insert a soft-removed copy of the document with the same ID and the removed flags, but only
+    // on the server to avoid duplicates on the client. Since we don't publish removed documents,
+    // this should have no consequence for the client.
+    if (Meteor.isServer) {
+      // TODO(aramk) Should we avoid triggering insert hooks?
+      self.insert(newDoc);
+    }
   });
 
   function sanitizeSelector(selector) {
