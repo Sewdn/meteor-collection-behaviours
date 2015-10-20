@@ -16,8 +16,8 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
     // on the server to avoid duplicates on the client. Since we don't publish removed documents,
     // this should have no consequence for the client.
     if (Meteor.isServer) {
-      // TODO(aramk) Should we avoid triggering insert hooks?
-      self.insert(newDoc);
+      // Avoid triggering insert hooks with the removed document.
+      self.direct.insert(newDoc);
     }
   });
 
