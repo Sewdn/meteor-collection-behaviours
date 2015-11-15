@@ -33,7 +33,10 @@ describe 'softRemovable', ->
         test.instanceOf doc.removedAt, Date, 'doc.removedAt'
 
       callback = ->
-        doc = animals.findOne(_id: id)
+        selector = {_id: id}
+        doc = animals.findOne(selector)
+        # Ensure "removed" key is not added to the selector.
+        test.isFalse selector.removed?
         test.equal doc._id, id, 'doc._id'
         test.isFalse doc.removed, 'doc.removed'
         test.instanceOf doc.removedAt, Date, 'doc.removedAt'
