@@ -1,4 +1,3 @@
-var constructor = Mongo.Collection;
 var behaviours = {};
 
 CollectionBehaviours = {};
@@ -30,16 +29,6 @@ CollectionBehaviours.extendCollectionInstance = function (self) {
   });
 };
 
-Mongo.Collection = function () {
-  var ret = constructor.apply(this, arguments);
+Meteor.addCollectionExtension(function () {
   CollectionBehaviours.extendCollectionInstance(this);
-  return ret;
-};
-
-Mongo.Collection.prototype = Object.create(constructor.prototype);
-
-for (var func in constructor) {
-  if (constructor.hasOwnProperty(func)) {
-    Mongo.Collection[func] = constructor[func];
-  }
-}
+});
