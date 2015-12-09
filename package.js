@@ -1,6 +1,6 @@
 Package.describe({
-  summary: "Extends Mongo.Collection with behaviour patterns using matb33:collection-hooks",
-  "version": "0.2.0",
+  "summary": "Extends Mongo.Collection with behaviour patterns using matb33:collection-hooks",
+  "version": "0.3.0",
   "git": "https://github.com/Sewdn/meteor-collection-behaviours.git",
   "name": "sewdn:collection-behaviours"
 });
@@ -14,12 +14,12 @@ Package.onUse(function (api, where) {
   api.addFiles = api.addFiles || api.add_files;     // backwards-compat
 
   if(api.versionsFrom) {
-    api.versionsFrom('METEOR@0.9.4');
+    api.versionsFrom("1.1.0.2");
     api.use([
       'mongo',
       'underscore',
       'lai:collection-extensions@0.1.3',
-      'matb33:collection-hooks@0.7.6'
+      'matb33:collection-hooks@0.8.1'
     ], both);
   } else {
     api.use([
