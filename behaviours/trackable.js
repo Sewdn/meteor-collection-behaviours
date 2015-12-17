@@ -7,7 +7,7 @@ CollectionBehaviours.defineBehaviour('trackable', function(getTransform, args){
       if(doc[field]){
         if(!modifier.$push)
           modifier.$push = {};
-        track = {trackedAt: Date.now()};
+        track = {trackedAt: Date.now(), updatedBy: !!userId ? userId : "N/A"};
         track[field] = doc[field];
         modifier.$push[field+"Track"] = track;
       }
