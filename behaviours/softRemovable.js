@@ -27,7 +27,7 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
       selector = {};
 
     if(selector && typeof selector.removed === 'undefined')
-      selector.removed = {$exists: false};
+      selector.removed = {removed: {$ne: true}};
   });
 
   self.before.findOne(function (userId, selector, options) {
@@ -35,7 +35,7 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
       selector = {};
 
     if(selector && typeof selector.removed === 'undefined')
-      selector.removed = {$exists: false};
+      selector.removed = {removed: {$ne: true}};
   });
 
   self.unRemove = function(selector){
