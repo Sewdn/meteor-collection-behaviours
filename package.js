@@ -46,7 +46,7 @@ Package.onTest(function(api) {
   api.addFiles = api.addFiles || api.add_files;     // backwards-compat
 
   api.use([
-    'aramk:utility@0.8.5',
+    'urbanetic:utility@1.2.0',
     'coffeescript',
     'mongo',
     'minimongo',
