@@ -1,7 +1,7 @@
 Package.describe({
   name: 'sewdn:collection-behaviours',
   summary: 'Extends Mongo.Collection with behaviour patterns using matb33:collection-hooks',
-  version: '0.2.0',
+  version: '1.0.0',
   git: 'https://github.com/Sewdn/meteor-collection-behaviours.git'
 });
 
@@ -14,7 +14,7 @@ Package.onUse(function (api, where) {
   api.addFiles = api.addFiles || api.add_files;     // backwards-compat
 
   if (api.versionsFrom) {
-    api.versionsFrom('METEOR@0.9.4');
+    api.versionsFrom('METEOR@1.6.1');
     api.use([
       'mongo',
       'underscore',
@@ -46,7 +46,6 @@ Package.onTest(function(api) {
   api.addFiles = api.addFiles || api.add_files;     // backwards-compat
 
   api.use([
-    'aramk:utility@0.8.5',
     'coffeescript',
     'mongo',
     'minimongo',
@@ -54,7 +53,8 @@ Package.onTest(function(api) {
     'test-helpers',
     'underscore',
     'peterellisjones:describe',
-    'sewdn:collection-behaviours'
+    'sewdn:collection-behaviours',
+    'urbanetic:utility@2.0.0'
   ]);
 
   api.addFiles([
