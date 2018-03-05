@@ -59,7 +59,6 @@ CollectionBehaviours.defineBehaviour('softRemovable', function(getTransform, arg
     }
   };
 
-
   // Add support for a collection.after.unRemove hook.
   // TODO(aramk) Too tedious to use CollectionHooks.defineAdvice() for now, so we cannot remove
   // a hook once it's added yet.

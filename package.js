@@ -18,7 +18,7 @@ Package.onUse(function (api, where) {
     api.use([
       'mongo',
       'underscore',
-      'matb33:collection-hooks@0.7.6'
+      'matb33:collection-hooks@0.8.4'
     ], both);
   } else {
     api.use([

@@ -51,8 +51,10 @@ describe 'softRemovable', ->
       
       if Meteor.isClient
         animals.unRemove(id, callback)
+        test.instanceOf animals.after.unRemove, Function
       else
         animals.unRemove(id)
+        test.instanceOf animals.after.unRemove, Function
         callback()
 
     animals.remove(id)
