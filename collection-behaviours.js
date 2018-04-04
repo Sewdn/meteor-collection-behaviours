@@ -32,26 +32,34 @@ CollectionBehaviours = {
 
   // Borrowed from CollectionHooks.
   wrapCollection: function (ns, as, callback) {
-    if (!as._CollectionPrototype) as._CollectionPrototype = new as.Collection(null);
-
-    var constructor = as.Collection;
-    var proto = as._CollectionPrototype;
-
+    if (!as._CollectionConstructor) as._CollectionConstructor = as.Collection
+    if (!as._CollectionPrototype) as._CollectionPrototype = new (as.Collection)(null)
+  
+    var constructor = ns._NewCollectionContructor || as._CollectionConstructor
+    var proto = as._CollectionPrototype
+  
     ns.Collection = function () {
-      var ret = constructor.apply(this, arguments);
+      var ret = constructor.apply(this, arguments);
       callback && callback(this, arguments);
-      return ret;
-    };
-
+      return ret
+    }
+    // Retain a reference to the new constructor to allow further wrapping.
+    ns._NewCollectionContructor = ns.Collection
+  
     // NOTE: Prototype must be Mongo.Collection to ensure instanceof check succeeds in the original
     // constructor.
-    ns.Collection.prototype = proto;
+    ns.Collection.prototype = proto
+    ns.Collection.prototype.constructor = ns.Collection
 
     for (var prop in constructor) {
       if (constructor.hasOwnProperty(prop)) {
-        ns.Collection[prop] = constructor[prop];
+        ns.Collection[prop] = constructor[prop]
       }
     }
+
+    // Meteor overrides the apply method which is copied from the constructor in the loop above. Replace it with the
+    // default method which we need if we were to further wrap ns.Collection.
+    ns.Collection.apply = Function.prototype.apply;
   }
 
 };
